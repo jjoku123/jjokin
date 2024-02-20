@@ -1,0 +1,34 @@
+docker container ls:
+
+CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS         PORTS                                       NAMES
+be7c9df34855   python-service_1j   "python3 ./service.py"   2 minutes ago    Up 9 seconds                                               compose_service-1_1
+bbcfda3beb88   node-service_2j     "docker-entrypoint.s…"   19 minutes ago   Up 9 seconds   0.0.0.0:8000->8000/tcp, :::8000->8000/tcp   compose_service-2_1
+
+docker network ls:
+
+NETWORK ID     NAME                     DRIVER    SCOPE
+97634b12dcaa   bridge                   bridge    local
+8d71705bdc75   compose_default          bridge    local
+2fe016a7c041   host                     host      local
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
