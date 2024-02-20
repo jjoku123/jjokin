@@ -1,0 +1,54 @@
+version: "3.8"
+services:
+    rabbitmq3:
+        container_name: "rabbitmq"
+        image: rabbitmq:3.8-management-alpine
+        environment:
+            - RABBITMQ_DEFAULT_USER=myuser
+            - RABBITMQ_DEFAULT_PASS=mypassword
+        ports:
+            # AMQP protocol port
+            - '5672:5672'
+            # HTTP management UI
+            - '15672:15672'
+        volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        networks:
+        - rabbitmq_net
+    orig:   
+        image: node-service_1
+        depends_on:
+        - "rabbitmq3"
+        # wait script to make sure rabbitmq is ready
+        command: ["./utils/wait.sh"] 
+        build:
+          dockerfile: Dockerfile
+          context:  ./ORIG 
+    obse: 
+        image: node-service_2
+        depends_on:
+        - "rabbitmq3"
+        command: ["./utils/wait.sh"]
+        build:
+          dockerfile: Dockerfile
+          context:  ./OBSE
+    imed: 
+        image: node-service_3
+        depends_on:
+        - "rabbitmq3"
+        command: ["./utils/wait.sh"]
+        build:
+          dockerfile: Dockerfile
+          context:  ./IMED
+    httpserv: 
+        image: node-service_4
+        build:
+          dockerfile: Dockerfile
+          context:  ./HTTPSERV    
+        #HTTP server port is exposed  
+        ports:
+           - "8080:8080"
+networks:   #Creates network rabbitmq_net
+ rabbitmq_net:
+   driver: bridge
+                  
