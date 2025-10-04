@@ -1,0 +1,37 @@
+
+services:
+  
+  service-2:    
+    build:
+      dockerfile: Dockerfile
+      context:  ./Service2
+    ports:
+     - "8000:8000"  
+    volumes:
+     - ./vstorage:/app
+ 
+  service-1:
+    build:
+      dockerfile: Dockerfile
+      context:  ./Service1  
+    ports:
+     - "8199:8199"     
+    volumes:
+     - ./vstorage:/app
+     
+  storage:
+    build:
+      dockerfile: Dockerfile
+      context:  ./Storage 
+    ports:
+      - '8080:8080'
+    volumes:
+     - ./storagedata:/app
+     
+volumes:
+  storagedata:
+ 
+networks: 
+  default:   
+    name: services-network
+    driver: bridge
