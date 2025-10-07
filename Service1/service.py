@@ -19,7 +19,7 @@ def get_space():
     free = psutil.disk_usage('/')
     print(free.free)
     free.free / (1024.0 ** 3)
-    #return free.free
+    
     return free.free/1000000
 
 
@@ -28,13 +28,13 @@ def get_uptime():
     with open('/proc/uptime', 'r') as f:
         uptime_seconds = float(f.readline().split()[0])
 
-    #return uptime_seconds
+    #return uptime_in hours
     return uptime_seconds/3600
 
 
 def get_message():
     msg = "Timestamp1 uptime; " + str(get_uptime()) + " hours, free disk in root: " + str(get_space()) + " Mbytes"
-    print("In Getmessage function")
+
     return msg
 
 

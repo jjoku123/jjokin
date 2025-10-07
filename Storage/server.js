@@ -1,13 +1,14 @@
 const express = require('express');
 
-//file serving
 const fs = require('fs');
 
 const app = express();
 
+
+//Sends logfile
 app.get('/log', (req, res) => {
 
- const logfile = fs.readFile("/app/storagex.log",(err,logfile)=>{
+ const logfile = fs.readFile("/app/storage.log",(err,logfile)=>{
   if(err){
     res.send(404).end("File not found");
   }
@@ -16,7 +17,7 @@ app.get('/log', (req, res) => {
 
 });
 });
-
+//Updates logfile
 app.post('/log', (req, res) => {
  
   var body ="";
@@ -25,20 +26,18 @@ app.post('/log', (req, res) => {
   {
     body +=chunk;
  
-    fs.writeFile("/app/storagex.log", body, {flag: 'a+'}, function(err){
+    fs.writeFile("/app/storage.log", body + "\r\n", {flag: 'a+'}, function(err){
           if(err) {
             return console.log(err);
           }
         });
     
-  
-    console.log('Request to write in logfile arrived');
   });
 
  res.set("Content-Type","text/plain");
- res.send("Logfile updated");
+ res.sendStatus(200);
 });
 
 app.listen(8080, () => {
-  console.log('REST API server running on port 8080');
+  
 }); 
