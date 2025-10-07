@@ -11,7 +11,6 @@ const exec = require('child_process').exec;
 const port  = 8000;
 
 
-
 var server = http.createServer(function (req, res){
  
   if(req.method === "GET")
@@ -19,11 +18,11 @@ var server = http.createServer(function (req, res){
     
    var body ="";
     //Create and save status message
-    getMessage(function(fullmessage){
+   getMessage(function(fullmessage){
       
-      saveFile(fullmessage);
+    saveFile(fullmessage);
 
-      body = fullmessage;
+    body = fullmessage;
 
     });
 
