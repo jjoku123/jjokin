@@ -1,13 +1,12 @@
 const http = require('http');
 const fs = require('fs');
-//const fs = require('fs').promises;
 var request = require('request');
-
 //for os uptime
 const os = require('os');
 const { disconnect } = require('process');
 //diskpace
 const exec = require('child_process').exec;
+
 
 const port  = 8000;
 
@@ -15,7 +14,6 @@ const port  = 8000;
 
 var server = http.createServer(function (req, res){
  
-
   if(req.method === "GET")
   {
     
@@ -33,7 +31,7 @@ var server = http.createServer(function (req, res){
       
     });
     
- req.on("end",function(){
+  req.on("end",function(){
       res.writeHead(200,{"Content-type": "text/plain"});
       res.end(body);
      });
@@ -44,7 +42,6 @@ var server = http.createServer(function (req, res){
 server.listen(port, () => {
   
 }); 
-
 
 
 //Functions
@@ -91,7 +88,6 @@ function getMessage(callback) {
     callback(fullmessage);
    });
   }
-
 
 
 function saveFile(msg){
