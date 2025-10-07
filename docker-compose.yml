@@ -4,9 +4,7 @@ services:
   service-2:    
     build:
       dockerfile: Dockerfile
-      context:  ./Service2
-    ports:
-     - "8000:8000"  
+      context:  ./Service2   
     volumes:
      - ./vstorage:/app
  
@@ -23,8 +21,6 @@ services:
     build:
       dockerfile: Dockerfile
       context:  ./Storage 
-    ports:
-      - '8080:8080'
     volumes:
      - ./storagedata:/app
      
